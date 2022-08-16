@@ -2,7 +2,6 @@
 include 'functions.php';
 $id = ($_GET['id']);
 $students = query("SELECT * FROM pelajar WHERE id=$id");
-
 ?>
 
 <!DOCTYPE html>
