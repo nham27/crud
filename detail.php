@@ -26,6 +26,7 @@ $students = query("SELECT * FROM pelajar WHERE id=$id");
                     <li>email:<?= $s['email'];?></li>
                     <li>kos: <?= $s['kos'];?></li>
                     <li>Update|Delete</li>
+                    <li><a href="latihan2.php">kembali</a></li>
                 </ul>
             </div>
             <?php endforeach;?>
