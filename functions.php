@@ -13,7 +13,16 @@ function query($query){
       $rows[] = $row;
    }
    return $rows;
-   
-   
+}
+
+function delete($id){
+   $conn = connection();
+   $query = "DELETE FROM pelajar WHERE id=$id";
+   $result = mysqli_query($conn,$query);
+
+   echo mysqli_error($conn);
+   return header('Location: index.php');
+   exit();
+  
 }
 

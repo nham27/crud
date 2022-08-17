@@ -25,9 +25,6 @@ $students = query("SELECT * FROM pelajar");
                 <th>No</th>
                 <th>nama</th>
                 <th>gambar</th>
-                <th>No Pelajar</th>
-                <th>Email</th>
-                <th>Kos</th>
                 <th>Action</th>
             </tr>
 
@@ -36,10 +33,7 @@ $students = query("SELECT * FROM pelajar");
             <tr>
                 <td><?= $i++; ?></td>
                 <td><?= $std['nama'];?></td>
-                <td><img src="img/<?= $std['gambar'];?>"></td>
-                <td><?= $std['studentId'];?></td>               
-                <td><?= $std['email'];?></td>
-                <td><?= $std['kos'];?></td>
+                <td><img src="img/<?= $std['gambar'];?>"></td>    
                 <td><a href="detail.php?id=<?= $std['id'];?>">Detail</a></td>
                 
             </tr>
