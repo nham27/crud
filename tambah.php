@@ -27,17 +27,17 @@ if(isset($_POST['tambah'])){
     <h1>Daftar Pelajar</h1>
     <form action="" method="POST">
         <li>
-            <label for="nama">Nama: 
+            <label for="nama">Nama : 
                 <input type="text" name="nama" autofocus>
             </label>
         </li>
         <li>
-            <label for="studentId">No Matrik:
+            <label for="studentId">No Matrik :
                 <input type="text" name="studentId">
             </label>
         </li>
         <li>
-            <label for="email" >Email:
+            <label for="email" >Email :
                 <input type="text" name="email">
             </label>
         </li>
@@ -47,7 +47,7 @@ if(isset($_POST['tambah'])){
             </label>
         </li>
         <li>
-            <label for="gambar">Gambar:
+            <label for="gambar">Gambar :
                 <input type="text" name="gambar">
             </label>
         </li>

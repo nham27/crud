@@ -27,17 +27,34 @@ function tambah($data){
    $query = "INSERT INTO pelajar
     VALUES(null,'$nama','$studentId','$gambar','$email','$kos')";
 
-   $result = mysqli_query($conn,$query);
-  echo mysqli_error($conn);
+   $result = mysqli_query($conn,$query) or die(mysqli_error($conn));
+//   echo mysqli_error($conn);
   return mysqli_affected_rows($conn);
    
 }
+
+function update($data){
+   $conn = conn();
+
+   $id=$data['id'];
+   $nama=$data['nama'];
+   $studentId=['studentId'];
+   $gambar=$data['gambar'];
+   $email=$data['email'];
+   $kos=$data['kos'];
+
+   $query="UPDATE pelajar SET nama='$nama',studentId='$studentId',gambar='$gambar',email='$email',kos='$kos' WHERE id=$id";
+   mysqli_query($conn,$query) or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+
+}
+
 function delete($id){
    $conn = connection();
    $query = "DELETE FROM pelajar WHERE id=$id";
-   $result = mysqli_query($conn,$query);
+   $result = mysqli_query($conn,$query) or die(mysqli_error($conn));
 
-   echo mysqli_error($conn);
+   // echo mysqli_error($conn);
    $row = mysqli_affected_rows($conn);
 
    if($row > 0){

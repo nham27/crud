@@ -26,7 +26,7 @@ $students = query("SELECT * FROM pelajar WHERE id=$id");
                     <li>email:<?= $s['email'];?></li>
                     <li>kos: <?= $s['kos'];?></li>
                     <li><a href="update.php?id=<?=$s['id'];?>">Update |</a>
-                   <a href="delete.php?id=<?= $s['id'];?>">Delete</a>
+                   <a href="delete.php?id=<?= $s['id'];?>" onclick="return confirm('Hapus data?');">Delete</a>
                 </li>
                  
                     <li><a href="index.php">kembali</a></li>
