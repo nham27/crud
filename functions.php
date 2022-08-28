@@ -8,21 +8,28 @@ function query($query){
    $conn = connection();
    $result = mysqli_query($conn,$query);
 
-   $rows=[];
+   
+   // kalau result lebih dari satu data
+   $rows = [];
    while($row = mysqli_fetch_assoc($result)){
       $rows[] = $row;
    }
    return $rows;
+
+   // kalau hasil hanya satu data
+   if (mysqli_num_rows($result) == 1) {
+      return mysqli_fetch_assoc($result);
+    }
 }
 
 function tambah($data){
    $conn = connection();
 
-   $nama = $data['nama'];
-   $studentId = $data['studentId'];
-   $gambar = $data['gambar'];
-   $email = $data['email'];
-   $kos = $data['kos'];
+   $nama = htmlspecialchars($data['nama']);
+   $studentId = htmlspecialchars($data['studentId']);
+   $gambar = htmlspecialchars($data['gambar']);
+   $email = htmlspecialchars($data['email']);
+   $kos = htmlspecialchars($data['kos']);
 
    $query = "INSERT INTO pelajar
     VALUES(null,'$nama','$studentId','$gambar','$email','$kos')";
@@ -30,23 +37,23 @@ function tambah($data){
    $result = mysqli_query($conn,$query) or die(mysqli_error($conn));
 //   echo mysqli_error($conn);
   return mysqli_affected_rows($conn);
-   
 }
 
 function update($data){
-   $conn = conn();
+   $conn = connection();
 
    $id=$data['id'];
-   $nama=$data['nama'];
-   $studentId=['studentId'];
-   $gambar=$data['gambar'];
-   $email=$data['email'];
-   $kos=$data['kos'];
+   $nama = htmlspecialchars($data['nama']);
+   $studentId = htmlspecialchars($data['studentId']);
+   $gambar = htmlspecialchars($data['gambar']);
+   $email = htmlspecialchars($data['email']);
+   $kos = htmlspecialchars($data['kos']);
 
-   $query="UPDATE pelajar SET nama='$nama',studentId='$studentId',gambar='$gambar',email='$email',kos='$kos' WHERE id=$id";
+   $query="UPDATE pelajar 
+   SET nama='$nama',studentId='$studentId',gambar='$gambar',email='$email',kos='$kos'
+    WHERE id= $id";
    mysqli_query($conn,$query) or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);
-
 }
 
 function delete($id){
@@ -68,7 +75,23 @@ function delete($id){
       alert('data gagal dibuang');  
    </script>";
    // header('Location: index.php');
-   // exit();
+   // exit;
 }
+}
+
+function search($keyword){
+   $conn = connection();
+
+   $query = "SELECT * FROM pelajar
+    WHERE nama LIKE '%$keyword%'";
+   $result = mysqli_query($conn,$query);
+
+   $rows=[];
+   while($row = mysqli_fetch_assoc($result)){
+      $rows[] = $row;
+   }
+  return $rows;
+
+  
 }
 

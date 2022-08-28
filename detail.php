@@ -1,6 +1,6 @@
 <?php
 include 'functions.php';
-$id = ($_GET['id']);
+$id = $_GET['id'];
 $students = query("SELECT * FROM pelajar WHERE id=$id");
 ?>
 
@@ -25,7 +25,7 @@ $students = query("SELECT * FROM pelajar WHERE id=$id");
                     <li>Student id:<?= $s['studentId'];?></li>
                     <li>email:<?= $s['email'];?></li>
                     <li>kos: <?= $s['kos'];?></li>
-                    <li><a href="update.php?id=<?=$s['id'];?>">Update |</a>
+                    <li><a href="update.php?id=<?= $s['id'];?>">Update |</a>
                    <a href="delete.php?id=<?= $s['id'];?>" onclick="return confirm('Hapus data?');">Delete</a>
                 </li>
                  

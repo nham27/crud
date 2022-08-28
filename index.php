@@ -2,6 +2,11 @@
 // connection to db
 include 'functions.php';
 $students = query("SELECT * FROM pelajar");
+
+if(isset($_POST['cari'])){
+    $students = search($_POST['keyword']);
+   
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +24,16 @@ $students = query("SELECT * FROM pelajar");
     <div class="row">
         <h1>Maklumat Pelajar</h1>
     </div>
+
+        <form action="" method="POST">
+                <input type="text" name="keyword" size="40" autocomplete="off" autofocus placeholder="masukkan pencarian..">
+                <button type="submit" name="cari">SEARCH</button>
+        </form>
+        
+  
     <div class="row">
         <a href="tambah.php">Daftar Pelajar</a>
+       
         <table>
             <tr>
                 <th>No</th>
@@ -28,14 +41,19 @@ $students = query("SELECT * FROM pelajar");
                 <th>gambar</th>
                 <th>Action</th>
             </tr>
-
+                <?php if(empty($students)) : ?>
+                   <tr>
+                    <td colspan="4">Tiada Maklumat</td>
+                   </tr>
+                <?php endif; ?>
+                    
             <?php  $i=1; 
-            foreach($students as $std): ?>
+            foreach($students as $std) : ?>
             <tr>
                 <td><?= $i++; ?></td>
                 <td><?= $std['nama'];?></td>
                 <td><img src="img/<?= $std['gambar'];?>"></td>    
-                <td><a href="detail.php?id=<?= $std['id'];?>">Detail</a></td>
+                <td><a href="detail.php?id=<?= $std['id']; ?>">Detail</a></td>
                 
             </tr>
         <?php endforeach;?>

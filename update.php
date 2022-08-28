@@ -4,7 +4,7 @@ include 'functions.php';
 // kembalikan user ke index.php, kalau takdak id
 if(!isset($_GET['id'])){
     return header('Location:index.php');
-    exit();
+    exit;
 }
 
 $id = $_GET['id'];
@@ -25,7 +25,6 @@ if(isset($_POST['update'])){
    }
 }
 
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +38,8 @@ if(isset($_POST['update'])){
     <h1>Kemaskini Maklumat Pelajar</h1>
     <form action="" method="POST">
         <?php foreach($student as $std): ?>
-            <input type="hidden" value="<?=$std['id'];?>">
-            <input type="hidden" value="<?=$std['studentId'];?>">
+            <input name="id" type="hidden" value="<?=$std['id'];?>">
+            
         <li>
             <label for="nama">Nama : 
                 <input type="text" name="nama" autofocus value="<?=$std['nama'];?>" >
@@ -48,7 +47,7 @@ if(isset($_POST['update'])){
         </li>
         <li>
             <label for="studentId">No Matrik :
-                <?=$std['studentId'];?>
+                <input name="studentId" type="text" value="<?=$std['studentId'];?>">
             </label>
         </li>
         <li>
