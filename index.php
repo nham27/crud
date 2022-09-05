@@ -27,7 +27,7 @@ if(isset($_POST['cari'])){
 </head>
 <body>
 
-<div class="container">
+
     <div class="row">
         <h1>Maklumat Pelajar</h1>
 
@@ -35,15 +35,15 @@ if(isset($_POST['cari'])){
     </div>
 
         <form action="" method="POST">
-                <input type="text" name="keyword" size="40" autocomplete="off" autofocus placeholder="masukkan pencarian..">
-                <button type="submit" name="cari">SEARCH</button>
+             <input type="text" name="keyword" size="40" autocomplete="off" autofocus placeholder="masukkan pencarian.." class="keyword">
+            <button type="submit" name="cari" class="search-button">SEARCH</button>
         </form>
         
   
     <div class="row">
         <a href="tambah.php">Daftar Pelajar</a>
-       
-        <table>
+       <div class="container">
+       <table>
             <tr>
                 <th>No</th>
                 <th>nama</th>
@@ -67,9 +67,9 @@ if(isset($_POST['cari'])){
             </tr>
         <?php endforeach;?>
         </table>
-       
-    </div>
+       </div>    
 </div>
 
+<script src="js/script.js"></script>
 </body>
 </html>
