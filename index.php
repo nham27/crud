@@ -1,4 +1,11 @@
 <?php
+// start session
+session_start();
+if(!isset($_SESSION['login'])){
+    header("Location:login.php");
+    exit;
+}
+
 // connection to db
 include 'functions.php';
 $students = query("SELECT * FROM pelajar");
@@ -23,6 +30,8 @@ if(isset($_POST['cari'])){
 <div class="container">
     <div class="row">
         <h1>Maklumat Pelajar</h1>
+
+        <a href="logout.php">Log Out</a>
     </div>
 
         <form action="" method="POST">

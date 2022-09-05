@@ -83,7 +83,10 @@ function search($keyword){
    $conn = connection();
 
    $query = "SELECT * FROM pelajar
-    WHERE nama LIKE '%$keyword%'";
+    WHERE nama LIKE '%$keyword%'
+    OR studentId LIKE '%$keyword%' 
+    OR email LIKE '%$keyword%' 
+    OR kos LIKE '%$keyword%'";
    $result = mysqli_query($conn,$query);
 
    $rows=[];
@@ -91,7 +94,91 @@ function search($keyword){
       $rows[] = $row;
    }
   return $rows;
-
-  
 }
 
+
+
+function signUp($data){
+   $conn = connection();
+
+   $username = htmlspecialchars($data['username']);
+   $password1 = mysqli_real_escape_string($conn, $data['password1']);
+   $password2  =mysqli_real_escape_string($conn, $data['password2']);
+
+
+   // jika username/ password kosong
+   if(empty($username) || empty($password1) || empty($password2)){
+      echo "<script>
+      alert('username/password kosong');
+      document.location.href = 'signUp.php';
+      </script>";
+      return false;
+   }
+
+   // jika username sudah ada
+   if(query("SELECT * FROM user WHERE username = '$username'")){
+      echo "<script>
+         alert('username telah di daftarkan!');
+         document.location.href='signUp.php';
+      </script>";
+      return false;
+   }
+   
+   // jika password tidak sama
+   if($password1 !== $password2){
+      echo "
+      <script>
+      alert('password kedua tidak sama');
+      document.location.href='signUp.php';
+      </script>";
+      return false;
+   }
+
+   // jika password kurang 5 digit
+   if(strlen($password1) < 5){
+      echo "
+      <script>
+      alert('password terlalu pendek!');
+      document.location.href='signUp.php';
+      </script>
+      ";
+      return false;
+   }
+
+   // jika password dan username match
+   // encrypt password
+   $passwordBaru = password_hash($password1,PASSWORD_DEFAULT);
+   
+   // insert ke table login
+   $query = "INSERT INTO user VALUES(null, '$username','$passwordBaru')";
+   mysqli_query($conn,$query) or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+
+}
+
+function login($data){
+   $conn = connection();
+
+   $username = htmlspecialchars($data['username']);
+   $password = htmlspecialchars($data['password']);
+
+   $query = "SELECT * FROM user WHERE username = '$username'";
+   $result = mysqli_query($conn,$query);
+
+   // cek username
+   if(mysqli_num_rows($result) == 1){
+
+      // cek password
+      $row = mysqli_fetch_assoc($result);
+      if(password_verify($password,$row['password'])){
+          $_SESSION['login'] = true;
+         header("Location:index.php");
+         exit;
+      }
+   }
+      return [
+         'error' => true,
+         'mesej' => 'Username / Password Salah!'
+       ];
+   
+}

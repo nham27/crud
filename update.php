@@ -1,4 +1,11 @@
 <?php
+// start session
+session_start();
+if(!isset($_SESSION['login'])){
+    header('Location:login.php');
+    exit;
+}
+
 include 'functions.php';
 
 // kembalikan user ke index.php, kalau takdak id
